@@ -1,0 +1,14 @@
+<ng-container *ngIf="!isUserLoggedIn()">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="email">E-Mail</label>
+      <input type="text" name="email" id="email" formControlName="email">
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" formControlName="password">
+    </div>
+    <button type="submit" [disabled]="!loginForm.valid">Login</button>
+  </form>
+  {{ loginForm.status }}
+</ng-container>

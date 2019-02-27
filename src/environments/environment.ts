@@ -4,6 +4,14 @@
 
 export const environment = {
     production: false,
+    firebase: {
+        apiKey: 'AIzaSyC4JhAr422qHeRk1EFJG4J55d_a9ogIhIg',
+        authDomain: 'ruder-club-allemannia-von-1866.firebaseapp.com',
+        databaseURL: 'https://ruder-club-allemannia-von-1866.firebaseio.com',
+        projectId: 'ruder-club-allemannia-von-1866',
+        storageBucket: 'ruder-club-allemannia-von-1866.appspot.com',
+        messagingSenderId: '389475701792',
+    },
 };
 
 /*
