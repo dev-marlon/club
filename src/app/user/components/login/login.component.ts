@@ -32,6 +32,9 @@ export class LoginComponent implements OnInit {
             })
             .catch((error: any) => {
                 console.log(error);
+
+                if (error.code === 'auth/wrong-password') {
+                }
             });
     }
 }
