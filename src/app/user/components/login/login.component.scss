@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+img {
+  width: 180px;
+  margin-bottom: 30px;
+}
+
+button {
+  width: 100%;
+  height: 40px;
+}
+
+.fields {
+  margin-bottom: 30px;
+}

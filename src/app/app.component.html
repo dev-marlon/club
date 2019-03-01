@@ -1,2 +1,5 @@
+<mat-toolbar *ngIf="isUserLoggedIn()">
+    Ruder-Club Allemannia
+</mat-toolbar>
 <button *ngIf="isUserLoggedIn()" (click)="logout()">Logout</button>
 <router-outlet></router-outlet>
