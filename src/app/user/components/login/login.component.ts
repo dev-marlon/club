@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
 
@@ -9,12 +10,18 @@ import { AuthService } from '../../auth.service';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+    public disableForm: boolean = false;
+
     public loginForm: FormGroup = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', Validators.required),
     });
 
-    constructor(private authService: AuthService, private router: Router) {}
+    constructor(
+        private authService: AuthService,
+        private router: Router,
+        private snackBar: MatSnackBar
+    ) {}
 
     public ngOnInit(): void {}
 
@@ -31,10 +38,17 @@ export class LoginComponent implements OnInit {
                 }
             })
             .catch((error: any) => {
-                console.log(error);
+                const snackBarRef = this.snackBar.open(error.code, null, {
+                    duration: 3000,
+                    horizontalPosition: 'center',
+                    verticalPosition: 'top',
+                });
 
-                if (error.code === 'auth/wrong-password') {
-                }
+                this.disableForm = true;
+
+                snackBarRef.afterDismissed().subscribe(() => {
+                    this.disableForm = false;
+                });
             });
     }
 }
