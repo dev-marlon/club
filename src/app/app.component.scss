@@ -2,3 +2,17 @@
   display: block;
   height: 100%;
 }
+
+img {
+  width: 180px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.logout-icon {
+  display: flex;
+  padding-left: 10px;
+  cursor: pointer;
+}

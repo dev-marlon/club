@@ -1,5 +1,8 @@
 <mat-toolbar *ngIf="isUserLoggedIn()">
-    Ruder-Club Allemannia
+    <mat-toolbar-row>
+        <img src="assets/logo-transparent.png">
+        <span class="spacer"></span>
+        <mat-icon class="logout-icon" (click)="logout()">exit_to_app</mat-icon>
+    </mat-toolbar-row>
 </mat-toolbar>
-<button *ngIf="isUserLoggedIn()" (click)="logout()">Logout</button>
 <router-outlet></router-outlet>

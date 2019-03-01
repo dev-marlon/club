@@ -1,4 +1,3 @@
-<img src="assets/logo-transparent.png">
 <ng-container *ngIf="!isUserLoggedIn()">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="fields">
@@ -29,7 +28,4 @@
             <button mat-flat-button color="accent" type="submit" [disabled]="!loginForm.valid">Login</button>
         </div>
     </form>
-</ng-container>
-<ng-container *ngIf="isUserLoggedIn()">
-    Angemeldet.
 </ng-container>
