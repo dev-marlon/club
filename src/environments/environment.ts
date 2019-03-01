@@ -5,12 +5,12 @@
 export const environment = {
     production: false,
     firebase: {
-        apiKey: 'AIzaSyC4JhAr422qHeRk1EFJG4J55d_a9ogIhIg',
-        authDomain: 'ruder-club-allemannia-von-1866.firebaseapp.com',
-        databaseURL: 'https://ruder-club-allemannia-von-1866.firebaseio.com',
-        projectId: 'ruder-club-allemannia-von-1866',
-        storageBucket: 'ruder-club-allemannia-von-1866.appspot.com',
-        messagingSenderId: '389475701792',
+        apiKey: 'AIzaSyCoDTXor92Wgq7SpD_xgtm0PUp_tw6l9S8',
+        authDomain: 'rc-allemannia.firebaseapp.com',
+        databaseURL: 'https://rc-allemannia.firebaseio.com',
+        projectId: 'rc-allemannia',
+        storageBucket: 'rc-allemannia.appspot.com',
+        messagingSenderId: '233642776514',
     },
 };
 

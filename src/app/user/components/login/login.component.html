@@ -10,5 +10,7 @@
     </div>
     <button type="submit" [disabled]="!loginForm.valid">Login</button>
   </form>
-  {{ loginForm.status }}
+</ng-container>
+<ng-container *ngIf="isUserLoggedIn()">
+  Angemeldet.
 </ng-container>

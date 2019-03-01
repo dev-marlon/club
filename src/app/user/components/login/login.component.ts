@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     public ngOnInit(): void {}
 
     public isUserLoggedIn(): boolean {
-        return this.authService.isUserLoggedIn;
+        return this.authService.isUserLoggedIn();
     }
 
     public onSubmit(): void {
