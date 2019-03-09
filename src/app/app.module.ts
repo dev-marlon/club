@@ -9,7 +9,6 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
-import { MembersModule } from './members/members.module';
 import { UserModule } from './user/user.module';
 
 @NgModule({
@@ -23,7 +22,6 @@ import { UserModule } from './user/user.module';
         }),
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
-        MembersModule,
         UserModule,
         MaterialModule,
     ],
