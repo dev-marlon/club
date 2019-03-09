@@ -5,6 +5,9 @@ import {
     Router,
     RouterStateSnapshot,
 } from '@angular/router';
+import { User } from 'firebase';
+import { Observable } from 'rxjs';
+import { map, take, tap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -16,14 +19,18 @@ export class AuthGuard implements CanActivate {
     public canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
-    ): boolean {
-        if (this.authService.isUserLoggedIn()) {
-            return true;
-        }
+    ): Observable<boolean> {
+        return this.authService.user.pipe(
+            take(1),
+            map((user: User | null) => !!user),
+            tap((loggedIn: boolean) => {
+                if (loggedIn) {
+                    return;
+                }
 
-        this.authService.redirectUrl = state.url;
-
-        this.router.navigate(['']);
-        return false;
+                this.authService.redirectUrl = state.url;
+                this.router.navigate(['/login']);
+            })
+        );
     }
 }

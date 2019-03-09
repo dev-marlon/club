@@ -6,6 +6,7 @@ import {
     NavigationStart,
     Router,
 } from '@angular/router';
+import { User } from 'firebase';
 import { AuthService } from './user/auth.service';
 
 @Component({
@@ -14,6 +15,8 @@ import { AuthService } from './user/auth.service';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+    public showMenu: boolean = false;
+
     constructor(private authService: AuthService, private router: Router) {
         this.router.events.subscribe((event: Event) => {
             if (event instanceof NavigationStart) {
@@ -30,13 +33,15 @@ export class AppComponent {
                 console.log(event.error);
             }
         });
-    }
 
-    public isUserLoggedIn(): boolean {
-        return this.authService.isUserLoggedIn();
+        this.authService.user.subscribe((user: User | null) => {
+            this.showMenu = !!user;
+        });
     }
 
     public logout(): void {
-        this.authService.logout().then(() => this.router.navigate(['']));
+        this.authService.logout().then(() => {
+            this.router.navigate(['/login']);
+        });
     }
 }

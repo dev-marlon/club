@@ -1,26 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase';
-
-const userLocalStorageKey = 'rc-allemannia.user';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    public user: User = null;
+    public user: Observable<User | null>;
+
     private _redirectUrl: string = null;
 
     constructor(private angularFireAuth: AngularFireAuth) {
-        this.angularFireAuth.authState.subscribe((user: User) => {
-            if (user) {
-                this.user = user;
-                localStorage.setItem(userLocalStorageKey, JSON.stringify(user));
-            } else {
-                this.user = null;
-                localStorage.removeItem(userLocalStorageKey);
-            }
-        });
+        this.user = this.angularFireAuth.authState;
     }
 
     public set redirectUrl(url: string) {
@@ -31,10 +23,6 @@ export class AuthService {
         return this._redirectUrl;
     }
 
-    public isUserLoggedIn(): boolean {
-        return localStorage.getItem(userLocalStorageKey) !== null;
-    }
-
     public async login(email: string, password: string): Promise<any> {
         return await this.angularFireAuth.auth.signInWithEmailAndPassword(
             email,
@@ -42,9 +30,7 @@ export class AuthService {
         );
     }
 
-    public async logout(): Promise<any> {
-        localStorage.removeItem('user');
-        this.user = null;
-        await this.angularFireAuth.auth.signOut();
+    public logout(): Promise<void> {
+        return this.angularFireAuth.auth.signOut();
     }
 }

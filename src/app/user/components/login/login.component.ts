@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'firebase';
 import { AuthService } from '../../auth.service';
+
+export interface LoginConfig {
+    defaultRedirectToOnSuccess: string;
+}
 
 @Component({
     selector: 'app-login',
@@ -11,6 +16,8 @@ import { AuthService } from '../../auth.service';
 })
 export class LoginComponent implements OnInit {
     public disableForm: boolean = false;
+    public isUserLoggedIn: boolean = false;
+    private config: LoginConfig = null;
 
     public loginForm: FormGroup = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
@@ -20,21 +27,30 @@ export class LoginComponent implements OnInit {
     constructor(
         private authService: AuthService,
         private router: Router,
-        private snackBar: MatSnackBar
-    ) {}
+        private snackBar: MatSnackBar,
+        private activatedRoute: ActivatedRoute
+    ) {
+        this.activatedRoute.data.subscribe((config: LoginConfig) => {
+            this.config = config;
+        });
+
+        this.authService.user.subscribe((user: User | null) => {
+            this.isUserLoggedIn = !!user;
+        });
+    }
 
     public ngOnInit(): void {}
-
-    public isUserLoggedIn(): boolean {
-        return this.authService.isUserLoggedIn();
-    }
 
     public onSubmit(): void {
         this.authService
             .login(this.loginForm.value.email, this.loginForm.value.password)
             .then(() => {
                 if (this.authService.redirectUrl) {
-                    this.router.navigate([this.authService.redirectUrl]);
+                    this.redirectTo(this.authService.redirectUrl);
+                }
+
+                if (this.config.defaultRedirectToOnSuccess) {
+                    this.redirectTo(this.config.defaultRedirectToOnSuccess);
                 }
             })
             .catch((error: any) => {
@@ -50,5 +66,9 @@ export class LoginComponent implements OnInit {
                     this.disableForm = false;
                 });
             });
+    }
+
+    private redirectTo(target: string): void {
+        this.router.navigate([target]);
     }
 }

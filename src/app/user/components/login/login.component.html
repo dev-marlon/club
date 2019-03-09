@@ -1,4 +1,4 @@
-<ng-container *ngIf="!isUserLoggedIn()">
+<ng-container *ngIf="isUserLoggedIn === false">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="fields">
             <div>
