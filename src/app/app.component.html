@@ -1,2 +1,8 @@
-Club app
+<mat-toolbar>
+    <mat-toolbar-row>
+        <img src="assets/logo-transparent.png">
+        <span class="spacer"></span>
+        <mat-icon class="logout-icon" (click)="logout()" *ngIf="showMenu">exit_to_app</mat-icon>
+    </mat-toolbar-row>
+</mat-toolbar>
 <router-outlet></router-outlet>

@@ -1,0 +1,130 @@
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+$rca-primary: #c91611;
+// #1c00db
+
+$rca-primary: (
+        50: #ffeaec,
+        100: #ffcbcd,
+        200: #f39691,
+        300: #ea6d66,
+        400: #f24b3e,
+        500: #f6391d,
+        600: #e72d1e,
+        700: #d62119,
+        800: #c91711,
+        900: #bb0000,
+        contrast: (
+                50: $dark-primary-text,
+                100: $dark-primary-text,
+                200: $dark-primary-text,
+                300: $light-primary-text,
+                400: $light-primary-text,
+                500: $light-primary-text,
+                600: $light-primary-text,
+                700: $light-primary-text,
+                800: $light-primary-text,
+                900: $light-primary-text,
+        )
+);
+
+$rca-secondary: (
+        50: #efe6fd,
+        100: #d4c1f9,
+        200: #b797f7,
+        300: #986bf5,
+        400: #7e47f2,
+        500: #601cef,
+        600: #5317e8,
+        700: #3d0ae0,
+        800: #003970,
+        900: #0000d5,
+        contrast: (
+                50: $dark-primary-text,
+                100: $dark-primary-text,
+                200: $dark-primary-text,
+                300: $light-primary-text,
+                400: $light-primary-text,
+                500: $light-primary-text,
+                600: $light-primary-text,
+                700: $light-primary-text,
+                800: $light-primary-text,
+                900: $light-primary-text,
+        )
+);
+
+
+$rca-primary1: (
+        50: #c91711,
+        100: #c91711,
+        200: #c91711,
+        300: #c91711,
+        400: #c91711,
+        500: #c91711,
+        600: #c91711,
+        700: #c91711,
+        800: #c91711,
+        900: #c91711,
+        contrast: (
+                50: $dark-primary-text,
+                100: $dark-primary-text,
+                200: $dark-primary-text,
+                300: $light-primary-text,
+                400: $light-primary-text,
+                500: $light-primary-text,
+                600: $light-primary-text,
+                700: $light-primary-text,
+                800: $light-primary-text,
+                900: $light-primary-text,
+        )
+);
+
+$rca-secondary1: (
+        50: #003970,
+        100: #003970,
+        200: #003970,
+        300: #003970,
+        400: #003970,
+        500: #003970,
+        600: #003970,
+        700: #003970,
+        800: #003970,
+        900: #003970,
+        contrast: (
+                50: $dark-primary-text,
+                100: $dark-primary-text,
+                200: $dark-primary-text,
+                300: $light-primary-text,
+                400: $light-primary-text,
+                500: $light-primary-text,
+                600: $light-primary-text,
+                700: $light-primary-text,
+                800: $light-primary-text,
+                900: $light-primary-text,
+        )
+);
+
+
+$rca-app-primary: mat-palette($rca-primary1);
+$rca-app-accent:  mat-palette($rca-secondary1);
+
+// The warn palette is optional (defaults to red).
+$rca-app-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$rca-app-theme: mat-light-theme($rca-app-primary, $rca-app-accent, $rca-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($rca-app-theme);

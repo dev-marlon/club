@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+img {
+  width: 180px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.logout-icon {
+  display: flex;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+mat-toolbar {
+  box-shadow: 0 4px 18px 0 rgba(0,0,0,.12), 0 7px 10px -5px rgba(0,0,0,.15);
+  background: #fff;
+}
