@@ -21,7 +21,6 @@ import { UserModule } from './user/user.module';
             enabled: environment.production,
         }),
         AngularFireModule.initializeApp(environment.firebase),
-        AngularFireAuthModule,
         UserModule,
         MaterialModule,
     ],
