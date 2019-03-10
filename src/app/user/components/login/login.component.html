@@ -1,31 +1,36 @@
 <ng-container *ngIf="isUserLoggedIn === false">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="fields">
-            <div>
-                <mat-form-field appearance="standard">
-                    <mat-label>E-Mail</mat-label>
-                    <input matInput type="text" formControlName="email">
-                    <mat-error
-                            *ngIf="loginForm.get('email').hasError('email') && !loginForm.get('email').hasError('required')">
-                        Die E-Mail Adresse ist ungültig.
-                    </mat-error>
-                    <mat-error *ngIf="loginForm.get('email').hasError('required')">
-                        Bitte geben sie ihre E-Mail Adresse ein.
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field appearance="standard">
-                    <mat-label>Passwort</mat-label>
-                    <input matInput type="password" formControlName="password">
-                    <mat-error *ngIf="loginForm.get('password').hasError('required')">
-                        Bitte geben sie ihr Passwort ein.
-                    </mat-error>
-                </mat-form-field>
-            </div>
-        </div>
-        <div>
-            <button mat-flat-button color="accent" type="submit" [disabled]="!loginForm.valid">Login</button>
-        </div>
+        <mat-card>
+            <mat-card-title>
+                Anmelden
+            </mat-card-title>
+            <mat-card-content>
+                    <div>
+                        <mat-form-field appearance="standard">
+                            <mat-label>E-Mail</mat-label>
+                            <input matInput type="text" formControlName="email">
+                            <mat-error
+                                    *ngIf="loginForm.get('email').hasError('email') && !loginForm.get('email').hasError('required')">
+                                Die E-Mail Adresse ist ungültig.
+                            </mat-error>
+                            <mat-error *ngIf="loginForm.get('email').hasError('required')">
+                                Bitte geben sie ihre E-Mail Adresse ein.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="standard">
+                            <mat-label>Passwort</mat-label>
+                            <input matInput type="password" formControlName="password">
+                            <mat-error *ngIf="loginForm.get('password').hasError('required')">
+                                Bitte geben sie ihr Passwort ein.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button color="accent" type="submit" [disabled]="!loginForm.valid">Login</button>
+            </mat-card-actions>
+        </mat-card>
     </form>
 </ng-container>
