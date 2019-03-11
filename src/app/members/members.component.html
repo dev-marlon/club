@@ -1,4 +1,4 @@
-<mat-card *ngFor="let member of members | async" class="card">
+<mat-card *ngFor="let member of members$ | async" class="card">
   <mat-card-content>
     {{ member.firstname }} {{ member.lastname }}
   </mat-card-content>
