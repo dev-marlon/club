@@ -3,9 +3,9 @@ import {
     AngularFirestore,
     AngularFirestoreCollection,
     CollectionReference,
-    DocumentChangeAction,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Member } from './models/member.interface';
 
 @Injectable({
@@ -24,13 +24,14 @@ export class MembersService {
         this.members$ = this.membersCollection.valueChanges();
     }
 
-    public getMember(userUid: string): Observable<any> {
+    public getMember(userUid: string): Observable<Member> {
         return this.angularFireStore
             .collection('members', (ref: CollectionReference) =>
                 ref
                     .where('user_uid', '==', '7oSfwCgU4Rexy5YMXf8IjfTMJJp2')
                     .limit(1)
             )
-            .valueChanges();
+            .valueChanges()
+            .pipe(map((result: any) => result[0]));
     }
 }
