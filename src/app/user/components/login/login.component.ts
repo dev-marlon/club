@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'firebase';
+import { Observable } from 'rxjs';
 import { AuthService } from '../../auth.service';
 
 export interface LoginConfig {
@@ -16,7 +17,7 @@ export interface LoginConfig {
 })
 export class LoginComponent implements OnInit {
     public disableForm: boolean = false;
-    public isUserLoggedIn: boolean = false;
+    public user: Observable<User | null>;
     private config: LoginConfig = null;
 
     public loginForm: FormGroup = new FormGroup({
@@ -34,9 +35,7 @@ export class LoginComponent implements OnInit {
             this.config = config;
         });
 
-        this.authService.user.subscribe((user: User | null) => {
-            this.isUserLoggedIn = !!user;
-        });
+        this.user = this.authService.user;
     }
 
     public ngOnInit(): void {}

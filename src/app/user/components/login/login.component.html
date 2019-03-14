@@ -1,4 +1,4 @@
-<ng-container *ngIf="isUserLoggedIn === false">
+<ng-container *ngIf="!(user | async)">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-card>
             <mat-card-title>
