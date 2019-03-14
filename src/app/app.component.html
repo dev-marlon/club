@@ -4,6 +4,9 @@
             <img src="assets/logo-transparent.png">
             <span class="toolbar-spacer"></span>
             <div class="menu" *ngIf="showMenu">
+                <a routerLink="/members/edit">
+                    <mat-icon>edit</mat-icon>
+                </a>
                 <mat-icon class="logout-icon" (click)="logout()">exit_to_app</mat-icon>
             </div>
         </mat-toolbar-row>
