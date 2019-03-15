@@ -1,7 +1,9 @@
 <div class="layout-spacer">
     <mat-toolbar>
         <mat-toolbar-row>
-            <img src="assets/logo-transparent.png">
+            <a routerLink="/">
+                <img src="assets/logo-transparent.png">
+            </a>
             <span class="toolbar-spacer"></span>
             <div class="menu" *ngIf="showMenu">
                 <a routerLink="/members/edit">
@@ -12,4 +14,6 @@
         </mat-toolbar-row>
     </mat-toolbar>
 </div>
-<router-outlet></router-outlet>
+<div class="layout">
+    <router-outlet></router-outlet>
+</div>

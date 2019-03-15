@@ -1,3 +1,30 @@
-<p>
-  edit works!
-</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-card-title>
+      Eintrag Bearbeiten
+    </mat-card-title>
+    <mat-card-content>
+      <div>
+        <mat-form-field appearance="standard">
+          <mat-label>Vorname</mat-label>
+          <input matInput type="text" formControlName="firstname">
+          <mat-error *ngIf="form.get('firstname').hasError('required')">
+            Bitte geben sie ihren Vornamen an.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="standard">
+          <mat-label>Nachname</mat-label>
+          <input matInput type="text" formControlName="lastname">
+          <mat-error *ngIf="form.get('lastname').hasError('required')">
+            Bitte geben sie ihren Nachnamen an.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button color="accent" type="submit" [disabled]="!form.valid">Speichern</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

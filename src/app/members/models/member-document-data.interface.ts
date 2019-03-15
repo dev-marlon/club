@@ -1,5 +1,4 @@
-export interface Member {
-    uid: string;
+export interface MemberDocumentData {
     firstname: string;
     lastname: string;
     userUid: string;
