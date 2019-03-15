@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,7 +15,7 @@ export interface LoginConfig {
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
     public disableForm: boolean = false;
     public user: Observable<User | null>;
     private config: LoginConfig = null;
@@ -37,8 +37,6 @@ export class LoginComponent implements OnInit {
 
         this.user = this.authService.user;
     }
-
-    public ngOnInit(): void {}
 
     public onSubmit(): void {
         this.authService
