@@ -1,30 +1,26 @@
-:host {
+.layout {
   display: flex;
   flex-direction: column;
   height: 100%;
-}
 
-.layout {
-  padding: 10px;
-  flex: 1;
-}
+  &__spacer {
+    margin-top: 67px;
+  }
 
-.layout-spacer {
-  margin-top: 67px;
+  &__content {
+    padding: 10px;
+    flex: 1;
+  }
 }
 
 img {
   width: 180px;
+  cursor: pointer;
+  outline: none;
 }
 
 .toolbar-spacer {
   flex: 1;
-}
-
-.logout-icon {
-  display: flex;
-  padding-left: 10px;
-  cursor: pointer;
 }
 
 mat-toolbar {
@@ -32,5 +28,24 @@ mat-toolbar {
   background: #fff;
   position: fixed;
   z-index: 1;
-  top: 0
+  top: 0;
+  transform: translateZ(0)
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  &__item {
+    padding: 5px 10px;
+  }
+
+  &__button {
+    width: 100%;
+  }
 }

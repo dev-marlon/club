@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material';
 import {
     Event,
     NavigationEnd,
@@ -16,6 +17,8 @@ import { AuthService } from './user/auth.service';
 })
 export class AppComponent {
     public showMenu: boolean = false;
+
+    @ViewChild('sidenav') public sidenav: MatSidenav;
 
     constructor(private authService: AuthService, private router: Router) {
         this.router.events.subscribe((event: Event) => {
@@ -40,8 +43,10 @@ export class AppComponent {
     }
 
     public logout(): void {
-        this.authService.logout().then(() => {
-            this.router.navigate(['/login']);
-        });
+        this.sidenav.close()
+            .then(() => this.authService.logout())
+            .then(() => {
+                this.router.navigate(['/login']);
+            });
     }
 }

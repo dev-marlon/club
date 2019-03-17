@@ -60,7 +60,7 @@ export class EditComponent implements OnInit, OnDestroy {
                     {
                         duration: 3000,
                         horizontalPosition: 'center',
-                        verticalPosition: 'top',
+                        verticalPosition: 'bottom',
                     }
                 );
             });

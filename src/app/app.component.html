@@ -1,19 +1,57 @@
-<div class="layout-spacer">
-    <mat-toolbar>
-        <mat-toolbar-row>
-            <a routerLink="/">
-                <img src="assets/logo-transparent.png">
-            </a>
-            <span class="toolbar-spacer"></span>
-            <div class="menu" *ngIf="showMenu">
-                <a routerLink="/members/edit">
-                    <mat-icon>edit</mat-icon>
-                </a>
-                <mat-icon class="logout-icon" (click)="logout()">exit_to_app</mat-icon>
+<mat-sidenav-container (backdropClick)="sidenav.toggle()">
+    <mat-sidenav-content>
+        <div class="layout">
+            <div class="layout__spacer">
+                <mat-toolbar>
+                    <mat-toolbar-row>
+                        <img src="assets/logo-transparent.png" routerLink="/">
+                        <ng-container *ngIf="showMenu">
+                            <span class="toolbar-spacer"></span>
+                            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+                        </ng-container>
+                    </mat-toolbar-row>
+                </mat-toolbar>
             </div>
-        </mat-toolbar-row>
-    </mat-toolbar>
-</div>
-<div class="layout">
-    <router-outlet></router-outlet>
-</div>
+            <div class="layout__content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </mat-sidenav-content>
+    <mat-sidenav #sidenav mode="over" position="end">
+        <ul class="menu" *ngIf="showMenu">
+            <li class="menu__item">
+                <button
+                    class="menu__button"
+                    mat-button
+                    routerLink="/members"
+                    routerLinkActive #route1="routerLinkActive"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    [color]="route1.isActive ? 'accent' : ''"
+                    (click)="sidenav.close()">
+                    <mat-icon>group</mat-icon> Mitglieder
+                </button>
+            </li>
+            <li class="menu__item">
+                <button
+                    class="menu__button"
+                    mat-button
+                    color="accent"
+                    routerLink="/members/edit"
+                    routerLinkActive #route2="routerLinkActive"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    [color]="route2.isActive ? 'accent' : ''"
+                    (click)="sidenav.close()">
+                    <mat-icon>edit</mat-icon> Bearbeiten
+                </button>
+            </li>
+            <li class="menu__item">
+                <button
+                    class="menu__button"
+                    mat-button
+                    (click)="logout()">
+                    <mat-icon>exit_to_app</mat-icon> Abmelden
+                </button>
+            </li>
+        </ul>
+    </mat-sidenav>
+</mat-sidenav-container>
