@@ -1,5 +1,11 @@
 <mat-card *ngFor="let member of members$ | async" class="card">
   <mat-card-content>
-    {{ member.firstname }} {{ member.lastname }}
+    <div style="margin-bottom: 3px;">
+      <strong>{{ member.lastname }}, {{ member.firstname }}</strong> (* 23.09.1982)<br>
+      <span style="color: #c91711; font-family: 'Times New Roman'; font-style: italic;">Trainer, Breitensport</span>
+    </div>
+      Stellinger Weg 53 - 20255 Hamburg<br>
+      Telefon: 0160 555 31 36<br>
+      info@t3labs.de
   </mat-card-content>
 </mat-card>
