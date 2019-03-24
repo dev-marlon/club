@@ -43,7 +43,8 @@ export class AppComponent {
     }
 
     public logout(): void {
-        this.sidenav.close()
+        this.sidenav
+            .close()
             .then(() => this.authService.logout())
             .then(() => {
                 this.router.navigate(['/login']);
