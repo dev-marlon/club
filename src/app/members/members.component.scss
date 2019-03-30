@@ -2,6 +2,30 @@
   display: block;
 }
 
+.filter {
+  display: flex;
+
+  &__item {
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
 .card {
   margin-bottom: 10px;
+}
+
+.filter-chips {
+  margin-bottom: 20px;
+}
+
+mat-chip {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::ng-deep .mat-form-field .mat-form-field-infix {
+  width: 160px;
 }
