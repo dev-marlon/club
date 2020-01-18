@@ -9,6 +9,7 @@ import { User } from 'firebase';
 import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
+import { PageRoutes } from '../../business-domain/page-routes.enum';
 
 @Injectable({
     providedIn: 'root',
@@ -29,7 +30,7 @@ export class AuthGuard implements CanActivate {
                 }
 
                 this.authService.redirectUrl = state.url;
-                this.router.navigate(['/authenticate']);
+                this.router.navigate([PageRoutes.Authenticate]);
             })
         );
     }
