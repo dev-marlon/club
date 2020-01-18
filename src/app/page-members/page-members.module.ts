@@ -7,9 +7,10 @@ import { EditComponent } from './components/edit/edit.component';
 import { PageMembersRoutingModule } from './page-members-routing.module';
 import { PageMembersComponent } from './page-members.component';
 import { MembersService } from './services/members.service';
+import { FilterComponent } from './components/filter/filter.component';
 
 @NgModule({
-    declarations: [PageMembersComponent, EditComponent],
+    declarations: [PageMembersComponent, EditComponent, FilterComponent],
     imports: [
         CommonModule,
         MaterialModule,

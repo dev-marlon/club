@@ -1,3 +1,4 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
 import {
     MatButtonModule,
@@ -24,6 +25,7 @@ import {
         MatSidenavModule,
         MatSnackBarModule,
         MatToolbarModule,
+        ScrollingModule,
     ],
     exports: [
         MatButtonModule,
@@ -36,6 +38,7 @@ import {
         MatSidenavModule,
         MatSnackBarModule,
         MatToolbarModule,
+        ScrollingModule,
     ],
 })
 export class MaterialModule {}

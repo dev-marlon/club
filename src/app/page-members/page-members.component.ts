@@ -59,11 +59,11 @@ export class PageMembersComponent {
             .get('categories')
             .valueChanges.pipe(startWith([]));
 
-        this.filteredMembers$ = combineLatest(
+        this.filteredMembers$ = combineLatest([
             this.members$,
             this.searchInput$,
-            this.categoriesSelect$
-        ).pipe(
+            this.categoriesSelect$,
+        ]).pipe(
             map(
                 ([members, searchString, selectedCategories]: [
                     Member[],
