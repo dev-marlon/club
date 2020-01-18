@@ -4,14 +4,14 @@ import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'firebase';
 import { Observable } from 'rxjs';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../services/auth.service';
 
 export interface LoginConfig {
     defaultRedirectToOnSuccess: string;
 }
 
 @Component({
-    selector: 'app-login',
+    selector: 'page-authenticate-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })

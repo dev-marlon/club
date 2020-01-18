@@ -8,7 +8,7 @@ import {
     Router,
 } from '@angular/router';
 import { User } from 'firebase';
-import { AuthService } from './user/auth.service';
+import { AuthService } from './page-authenticate/services/auth.service';
 
 @Component({
     selector: 'app-root',
@@ -43,10 +43,11 @@ export class AppComponent {
     }
 
     public logout(): void {
-        this.sidenav.close()
+        this.sidenav
+            .close()
             .then(() => this.authService.logout())
             .then(() => {
-                this.router.navigate(['/login']);
+                this.router.navigate(['/authenticate']);
             });
     }
 }

@@ -10,7 +10,7 @@ import { Member } from './models/member.interface';
     templateUrl: './members.component.html',
     styleUrls: ['./members.component.scss'],
 })
-export class MembersComponent {
+export class PageMemberlistComponent {
     public members$: Observable<Member[]>;
     public filteredMembers$: Observable<Member[]>;
 

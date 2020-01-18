@@ -8,8 +8,8 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MemberDocumentData } from './models/member-document-data.interface';
-import { Member } from './models/member.interface';
+import { MemberDocumentData } from '../models/member-document-data.interface';
+import { Member } from '../models/member.interface';
 
 @Injectable({
     providedIn: 'root',
@@ -47,9 +47,9 @@ export class MembersService {
         member: Member,
         memberDocumentData: MemberDocumentData
     ): Promise<void> {
-        const userRef: AngularFirestoreDocument<
-            MemberDocumentData
-        > = this.angularFireStore.doc(`members/${member.uid}`);
+        const userRef: AngularFirestoreDocument<MemberDocumentData> = this.angularFireStore.doc(
+            `members/${member.uid}`
+        );
 
         return userRef.set(memberDocumentData);
     }

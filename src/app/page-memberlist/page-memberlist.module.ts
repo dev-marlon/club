@@ -4,19 +4,19 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { EditComponent } from './components/edit/edit.component';
-import { MembersRoutingModule } from './members-routing.module';
-import { MembersComponent } from './members.component';
-import { MembersService } from './members.service';
+import { PageMemberlistRoutingModule } from './page-memberlist-routing.module';
+import { PageMemberlistComponent } from './page-memberlist.component';
+import { MembersService } from './services/members.service';
 
 @NgModule({
-    declarations: [MembersComponent, EditComponent],
+    declarations: [PageMemberlistComponent, EditComponent],
     imports: [
         CommonModule,
         MaterialModule,
-        MembersRoutingModule,
+        PageMemberlistRoutingModule,
         AngularFirestoreModule,
         ReactiveFormsModule,
     ],
     providers: [MembersService],
 })
-export class MembersModule {}
+export class PageMemberlistModule {}

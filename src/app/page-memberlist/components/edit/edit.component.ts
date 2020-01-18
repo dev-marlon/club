@@ -4,10 +4,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { User } from 'firebase';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../../../user/auth.service';
-import { MembersService } from '../../members.service';
+
+import { AuthService } from '../../../page-authenticate/services/auth.service';
+
 import { MemberDocumentData } from '../../models/member-document-data.interface';
 import { Member } from '../../models/member.interface';
+import { MembersService } from '../../services/members.service';
 
 @Component({
     selector: 'app-edit',

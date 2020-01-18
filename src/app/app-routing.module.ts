@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './user/auth.guard';
-import {
-    LoginComponent,
-    LoginConfig,
-} from './user/components/login/login.component';
+import { LoginConfig } from './page-authenticate/components/login/login.component';
+import { AuthGuard } from './page-authenticate/guards/auth.guard';
+import { PageAuthenticateComponent } from './page-authenticate/page-authenticate.component';
 
 const routes: Routes = [
     {
@@ -13,8 +11,8 @@ const routes: Routes = [
         redirectTo: 'members',
     },
     {
-        path: 'login',
-        component: LoginComponent,
+        path: 'authenticate',
+        component: PageAuthenticateComponent,
         data: {
             defaultRedirectToOnSuccess: 'members',
         } as LoginConfig,
