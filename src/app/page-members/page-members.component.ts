@@ -2,15 +2,16 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { combineLatest, Observable, of } from 'rxjs';
 import { debounce, delay, map, startWith } from 'rxjs/operators';
-import { MembersService } from './members.service';
+
 import { Member } from './models/member.interface';
+import { MembersService } from './services/members.service';
 
 @Component({
-    selector: 'app-members',
-    templateUrl: './members.component.html',
-    styleUrls: ['./members.component.scss'],
+    selector: 'page-members',
+    templateUrl: './page-members.component.html',
+    styleUrls: ['./page-members.component.scss'],
 })
-export class PageMemberlistComponent {
+export class PageMembersComponent {
     public members$: Observable<Member[]>;
     public filteredMembers$: Observable<Member[]>;
 

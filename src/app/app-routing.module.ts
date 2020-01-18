@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginConfig } from './page-authenticate/components/login/login.component';
 import { AuthGuard } from './page-authenticate/guards/auth.guard';
-import { PageAuthenticateComponent } from './page-authenticate/page-authenticate.component';
+import {
+    PageAuthenticateComponent,
+    PageAuthenticateConfig,
+} from './page-authenticate/page-authenticate.component';
 
 const routes: Routes = [
     {
@@ -15,12 +17,12 @@ const routes: Routes = [
         component: PageAuthenticateComponent,
         data: {
             defaultRedirectToOnSuccess: 'members',
-        } as LoginConfig,
+        } as PageAuthenticateConfig,
     },
     {
         path: 'members',
         canActivate: [AuthGuard],
-        loadChildren: './members/members.module#MembersModule',
+        loadChildren: './page-members/page-members.module#PageMembersModule',
     },
 ];
 
