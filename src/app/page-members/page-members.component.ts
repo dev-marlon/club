@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { combineLatest, Observable, of, Subject } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
+import { filter, map, startWith } from 'rxjs/operators';
 
 import { FilterData } from './components/filter/filter.component';
 import { Member } from './models/member.interface';
@@ -15,7 +15,9 @@ export class PageMembersComponent {
     public members$: Observable<Member[]>;
     public filteredMembers$: Observable<Member[]>;
 
-    private filterChanged$: Subject<FilterData> = new Subject<FilterData>();
+    private filterChanged$: BehaviorSubject<FilterData> = new BehaviorSubject<
+        FilterData
+    >({ searchString: '', categories: [] });
 
     constructor(private membersService: MembersService) {
         this.members$ = this.membersService.members$.pipe(
@@ -28,11 +30,11 @@ export class PageMembersComponent {
 
         this.filteredMembers$ = combineLatest([
             this.members$,
-            this.filterChanged$.pipe(startWith(<string>null)),
+            this.filterChanged$,
         ]).pipe(
             map(([members, filterData]: [Member[], FilterData]) => {
-                if (filterData === null) {
-                    return members;
+                if (filterData.searchString === '') {
+                    return [members, filterData];
                 }
 
                 let filteredMembers = members;
@@ -54,6 +56,15 @@ export class PageMembersComponent {
                     );
                 }
 
+                return [filteredMembers, filterData];
+            }),
+            map(([members, filterData]: [Member[], FilterData]) => {
+                if (filterData.categories.length === 0) {
+                    return [members, filterData];
+                }
+
+                let filteredMembers = members;
+
                 if (filterData.categories.length > 0) {
                     filteredMembers = filteredMembers.filter(
                         (member: Member) => {
@@ -67,15 +78,12 @@ export class PageMembersComponent {
                 }
 
                 return filteredMembers;
-            })
+            }),
+            map(([members, _]: [Member[], FilterData]) => members)
         );
     }
 
     public onFilterChange(filterData: FilterData): void {
         this.filterChanged$.next(filterData);
-    }
-
-    private applyFilter(): any[] {
-        return [];
     }
 }
