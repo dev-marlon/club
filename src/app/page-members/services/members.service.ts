@@ -10,11 +10,12 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MemberDocumentData } from '../models/member-document-data.interface';
 import { Member } from '../models/member.interface';
+import { MembersInterface } from './members.interface';
 
 @Injectable({
     providedIn: 'root',
 })
-export class MembersService {
+export class MembersService implements MembersInterface {
     private membersCollection: AngularFirestoreCollection<Member>;
     public members$: Observable<Member[]>;
 

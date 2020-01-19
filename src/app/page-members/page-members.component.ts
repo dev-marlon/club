@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
-import { filter, map, startWith } from 'rxjs/operators';
+import { filter, map, startWith, tap } from 'rxjs/operators';
 
 import { FilterData } from './components/filter/filter.component';
 import { Member } from './models/member.interface';
@@ -21,12 +21,17 @@ export class PageMembersComponent {
 
     constructor(private membersService: MembersService) {
         this.members$ = this.membersService.members$.pipe(
+            tap((members: Member[]) => {
+                console.log(members);
+            }),
             map((members: Member[]) =>
                 members.sort((a: Member, b: Member) =>
                     a.lastname < b.lastname ? -1 : 1
                 )
             )
         );
+
+        this.members$.subscribe();
 
         this.filteredMembers$ = combineLatest([
             this.members$,
