@@ -1,0 +1,31 @@
+<form
+    *ngIf="true"
+    [formGroup]="form">
+    <div class="filter-item">
+        <mat-form-field appearance="standard">
+            <mat-label>Suchen</mat-label>
+            <input matInput type="text" formControlName="searchString">
+        </mat-form-field>
+    </div>
+    <div class="filter-item">
+        <mat-form-field appearance="standard">
+            <mat-label>
+                Kategorie
+            </mat-label>
+            <mat-select placeholder="Kategorie" formControlName="categories" multiple>
+                <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</form>
+<section class="filter__chips" *ngIf="selectedCategories.length">
+    <mat-chip-list>
+        <mat-chip
+            *ngFor="let category of selectedCategories"
+            removable
+            (removed)="removeFilterChip(category)">
+            {{ category }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+    </mat-chip-list>
+</section>

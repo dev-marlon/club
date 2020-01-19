@@ -4,39 +4,9 @@
   height: 100%;
 }
 
-.filter {
-  height: 80px;
-
-  &--has-chips {
-    height: 120px;
-    margin-bottom: 20px;
-  }
-
-  &__form {
-    display: flex;
-  }
-
-  &__item {
-    margin-right: 10px;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-}
-
 .card {
   margin-bottom: 10px;
 }
-
-mat-chip {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-::ng-deep .mat-form-field .mat-form-field-infix {
-  width: 160px;
-}
-
 
 
 .filter {

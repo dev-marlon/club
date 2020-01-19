@@ -1,34 +1,6 @@
-<section
-  class="filter"
-  [class.filter--has-chips]="(categoriesSelect$ | async)?.length">
-  <form [formGroup]="form" class="filter__form" *ngIf="true">
-    <div class="filter__item">
-      <mat-form-field appearance="standard">
-        <mat-label>Suchen</mat-label>
-        <input matInput type="text" formControlName="searchString">
-      </mat-form-field>
-    </div>
-    <div class="filter__item">
-      <mat-form-field appearance="standard">
-        <mat-label>
-          Kategorie
-        </mat-label>
-        <mat-select placeholder="Kategorie" formControlName="categories" multiple>
-          <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </form>
-  <section class="filter__chips" *ngIf="categoriesSelect$ | async">
-    <mat-chip-list>
-      <mat-chip *ngFor="let category of categoriesSelect$ | async" removable (removed)="removeFilterChip(category)">
-        {{ category }}
-        <mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-    </mat-chip-list>
-  </section>
-</section>
-
+<page-members-filter
+  (filterChange)="onFilterChange($event)">
+</page-members-filter>
 <section class="list">
   <cdk-virtual-scroll-viewport itemSize="3" class="list__container">
     <mat-card *cdkVirtualFor="let member of filteredMembers$ | async" class="card">

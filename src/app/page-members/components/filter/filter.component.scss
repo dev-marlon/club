@@ -1,0 +1,28 @@
+:host {
+  height: 80px;
+
+  &.categories-selected {
+    height: 120px;
+    margin-bottom: 20px;
+  }
+}
+
+form {
+  display: flex;
+}
+
+.filter-item {
+  margin-right: 10px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+mat-chip {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::ng-deep .mat-form-field .mat-form-field-infix {
+  width: 160px;
+}
