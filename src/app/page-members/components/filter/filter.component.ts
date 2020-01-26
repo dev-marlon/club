@@ -1,6 +1,13 @@
-import { Component, EventEmitter, HostBinding, Output } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    HostBinding,
+    OnDestroy,
+    Output,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { map, tap } from 'rxjs/operators';
+import { map, takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 export interface FilterData {
     searchString: string;
@@ -14,7 +21,7 @@ const searchStringMinLength = 2;
     templateUrl: './filter.component.html',
     styleUrls: ['./filter.component.scss'],
 })
-export class FilterComponent {
+export class FilterComponent implements OnDestroy {
     public form: FormGroup = new FormGroup({
         searchString: new FormControl('', [Validators.minLength(2)]),
         categories: new FormControl(''),
@@ -26,6 +33,8 @@ export class FilterComponent {
         'Vorstand',
     ];
     public selectedCategories: string[] = [];
+
+    private destroy$: Subject<void> = new Subject<void>();
 
     @HostBinding('class.categories-selected')
     public get categoriesSelected(): boolean {
@@ -48,11 +57,17 @@ export class FilterComponent {
                 }),
                 tap((filterData: FilterData) => {
                     this.selectedCategories = filterData.categories;
-                })
+                }),
+                takeUntil(this.destroy$)
             )
             .subscribe((filterData: FilterData) => {
                 this.filterChange.emit(filterData);
             });
+    }
+
+    public ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
     public removeFilterChip(category: string): void {

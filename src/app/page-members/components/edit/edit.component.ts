@@ -3,13 +3,14 @@ import { DocumentReference } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { User } from 'firebase';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 import { AuthService } from '../../../page-authenticate/services/auth.service';
 
 import { MemberDocumentData } from '../../models/member-document-data.interface';
 import { Member } from '../../models/member.interface';
 import { MembersService } from '../../services/members.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-edit',
@@ -20,6 +21,7 @@ export class EditComponent implements OnInit, OnDestroy {
     private user: User | null;
     private member: Member | undefined;
     private memberServiceSubscription: Subscription;
+    private destroy$: Subject<void> = new Subject<void>();
 
     public form: FormGroup = new FormGroup({
         firstname: new FormControl('', [Validators.required]),
@@ -31,14 +33,17 @@ export class EditComponent implements OnInit, OnDestroy {
         private membersService: MembersService,
         private snackBar: MatSnackBar
     ) {
-        this.authService.user.subscribe((user: User | null) => {
-            this.user = user;
-        });
+        this.authService.user$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((user: User | null) => {
+                this.user = user;
+            });
     }
 
     public ngOnInit(): void {
         this.memberServiceSubscription = this.membersService
             .getByUserUid(this.user.uid)
+            .pipe(takeUntil(this.destroy$))
             .subscribe((member: Member) => {
                 if (member === undefined) {
                     return;
@@ -85,6 +90,8 @@ export class EditComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy(): void {
         this.memberServiceSubscription.unsubscribe();
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
     private addMember(): Promise<DocumentReference | void> {

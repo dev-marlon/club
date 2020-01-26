@@ -8,12 +8,12 @@ import UserCredential = firebase.auth.UserCredential;
     providedIn: 'root',
 })
 export class AuthService {
-    public user: Observable<User | null>;
+    public user$: Observable<User | null>;
 
     private _redirectUrl: string = null;
 
     constructor(private angularFireAuth: AngularFireAuth) {
-        this.user = this.angularFireAuth.authState;
+        this.user$ = this.angularFireAuth.authState;
     }
 
     public set redirectUrl(url: string) {

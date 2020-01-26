@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'firebase';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { LoginData } from './components/login/login.component';
 import { AuthService } from './services/auth.service';
+import { takeUntil } from 'rxjs/operators';
 
 export interface PageAuthenticateConfig {
     defaultRedirectToOnSuccess: string;
@@ -15,11 +16,12 @@ export interface PageAuthenticateConfig {
     templateUrl: './page-authenticate.component.html',
     styleUrls: ['./page-authenticate.component.scss'],
 })
-export class PageAuthenticateComponent {
-    public loginFormDisabled: boolean = false;
-    public user: Observable<User | null>;
+export class PageAuthenticateComponent implements OnDestroy {
+    public loginFormDisabled = false;
+    public user$: Observable<User | null>;
 
     private config: PageAuthenticateConfig = null;
+    private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
         private authService: AuthService,
@@ -27,10 +29,17 @@ export class PageAuthenticateComponent {
         private router: Router,
         private snackBar: MatSnackBar
     ) {
-        this.activatedRoute.data.subscribe((config: PageAuthenticateConfig) => {
-            this.config = config;
-        });
-        this.user = this.authService.user;
+        this.activatedRoute.data
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((config: PageAuthenticateConfig) => {
+                this.config = config;
+            });
+        this.user$ = this.authService.user$;
+    }
+
+    public ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
     public onLogin(loginData: LoginData): void {
@@ -54,9 +63,12 @@ export class PageAuthenticateComponent {
 
                 this.loginFormDisabled = true;
 
-                snackBarRef.afterDismissed().subscribe(() => {
-                    this.loginFormDisabled = false;
-                });
+                snackBarRef
+                    .afterDismissed()
+                    .pipe(takeUntil(this.destroy$))
+                    .subscribe(() => {
+                        this.loginFormDisabled = false;
+                    });
             });
     }
 
