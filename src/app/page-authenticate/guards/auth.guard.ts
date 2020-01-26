@@ -8,8 +8,8 @@ import {
 import { User } from 'firebase';
 import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
-import { AuthService } from '../services/auth.service';
 import { PageRoutes } from '../../business-domain/page-routes.enum';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
     providedIn: 'root',
