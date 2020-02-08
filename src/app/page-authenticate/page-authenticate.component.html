@@ -1,4 +1,4 @@
-<ng-container *ngIf="(user$ | async) === false">
+<ng-container *ngIf="(user$ | async) === null">
     <page-authenticate-login
         (login)="onLogin($event)">
     </page-authenticate-login>
