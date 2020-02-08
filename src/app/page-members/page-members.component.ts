@@ -60,7 +60,7 @@ export class PageMembersComponent {
             }),
             map(([members, filterData]: [Member[], FilterData]) => {
                 if (filterData.categories.length === 0) {
-                    return [members, filterData];
+                    return members;
                 }
 
                 let filteredMembers = members;
@@ -78,8 +78,7 @@ export class PageMembersComponent {
                 }
 
                 return filteredMembers;
-            }),
-            map(([members, _]: [Member[], FilterData]) => members)
+            })
         );
     }
 
